@@ -97,6 +97,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "lent-it:build:production",
+            "firebaseProject": "lent-it",
+            "firebaseHostingSite": "lent-it"
+          }
         }
       }
     }

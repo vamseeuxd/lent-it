@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "lent-it": {
+      "hosting": {
+        "lent-it": [
+          "lent-it"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "lent-it"
+  }
+}
