@@ -6,6 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "deploy": "firebase deploy",
+    "module": "ng g m login --route login --module app ",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -21,6 +22,9 @@
     "@angular/platform-browser-dynamic": "^15.0.0",
     "@angular/router": "^15.0.0",
     "bootstrap": "^5.2.3",
+    "firebase": "^9.14.0",
+    "firebaseui": "^6.0.2",
+    "firebaseui-angular": "^6.1.3",
     "ngx-bootstrap": "^6.2.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
