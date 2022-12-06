@@ -30,15 +30,49 @@
         </li>
       </ul> -->
       <div class="d-flex ms-auto" role="search">
-        <button class="btn btn-link text-white" type="submit">
-          <i class="fa fa-sign-out"></i>
-        </button>
+        <ng-container *ngIf="user$ | async as user">
+          <img [src]="user.photoURL" role="button" class="rounded-circle shadow border" width="45" alt="">
+          <button class="btn btn-link text-dark" (click)="logout()" type="submit">
+            <i class="fa fa-sign-out"></i>
+          </button>
+        </ng-container>
       </div>
     </div>
   </div>
 </nav>
 <div class="container-fluid pt-2">
-  <div class="border container-fluid shadow-sm" style="min-height: calc(100vh - 80px);">
-    <router-outlet></router-outlet>
+  <div
+    class="border container-fluid shadow"
+    style="min-height: calc(100vh - 80px)"
+  >
+    <ng-container *ngIf="user$ | async as user; else showLogin">
+      <router-outlet></router-outlet>
+        <!-- <small>
+          <pre>{{ user | json }}</pre>
+        </small> -->
+    </ng-container>
   </div>
 </div>
+
+<div
+  *ngIf="loaderService.isLoader"
+  class="fixed-top vw-100 vh-100 d-flex flex-column justify-content-center align-items-center"
+  style="background-color: rgba(0, 0, 0, 0.5)"
+>
+  <!-- <div class="spinner-border text-info" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div> -->
+  <img src="../assets/loading.gif" style="width: 75px" />
+  <span class="text-white">Please wait...</span>
+</div>
+
+<ng-template #showLogin>
+  <div
+    style="min-height: calc(100vh - 80px)"
+    class="d-flex w-100 h-100 d-flex flex-column justify-content-center align-items-center"
+  >
+    <button class="btn btn-danger rounded-0 shadow" (click)="login()">
+      Google Login
+    </button>
+  </div>
+</ng-template>

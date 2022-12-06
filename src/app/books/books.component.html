@@ -1,0 +1,87 @@
+<div class="row">
+  <div class="col-md-6 offset-md-3 col-sm-8 offset-sm-2">
+    <h4 class="text-muted mt-2 mb-3 border-bottom pb-2 d-flex">
+      Manage Books
+      <button
+        (click)="showEditModal({ id: '', name: '' }, editBookModal, false)"
+        class="btn btn-outline-info btn-sm shadow-sm ms-auto"
+      >
+        <i class="fa fa-plus me-1"></i> Add New Book
+      </button>
+    </h4>
+    <ul class="list-group" *ngIf="books$|async as books;else noBooksToShow">
+      <li class="list-group-item d-flex align-items-center" *ngFor="let book of books">
+        <h6 class="m-0 p-0 text-muted">{{ book.name }}</h6>
+        <button
+          (click)="deleteBook(book)"
+          title="Delete Book"
+          class="btn btn-danger btn-sm ms-auto shadow-sm"
+        >
+          <i class="fa fa-trash"></i>
+        </button>
+        <button
+          (click)="showEditModal(book, editBookModal)"
+          title="Edit Book"
+          class="btn btn-warning btn-sm ms-3 shadow-sm"
+        >
+          <i class="fa fa-edit"></i>
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  bsModal
+  #editBookModal="bs-modal"
+  [config]="{ backdrop: 'static' }"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="dialog-static-name"
+>
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 id="dialog-static-name" class="modal-title pull-left">
+          {{ isEdit ? "Edit" : "Add New " }} Book
+        </h6>
+        <button
+          class="btn btn-outline-danger btn-sm"
+          (click)="editBookModal.hide()"
+        >
+          <i class="fa fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label"
+            >Book Name</label
+          >
+          <input
+            type="text"
+            #editBookName
+            (keyup.enter)="saveEdit(editBookModal)"
+            [(ngModel)]="editBook.name"
+            class="form-control"
+            placeholder="Enter Book Name"
+          />
+        </div>
+
+        <div class="d-flex">
+          <button
+            (click)="saveEdit(editBookModal)"
+            [disabled]="editBookName.value.length < 3"
+            class="btn btn-primary btn-sm ms-auto"
+          >
+            Save
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #noBooksToShow>
+  <h5 class="text-muted text-center"><i class="fa fa-exclamation text-info" aria-hidden="true"></i> No Books to Show...</h5>
+</ng-template>
