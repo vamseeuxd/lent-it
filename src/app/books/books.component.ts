@@ -1,9 +1,11 @@
+import { PublisherTypeaheadComponent } from './../publisher-typeahead/component';
 import { map } from 'rxjs/operators';
 import { LoaderService } from './../loader.service';
 import { Observable, switchMap, tap } from 'rxjs';
 import { BooksService, IBook } from './books.service';
 import { Component } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap/modal';
+import { AuthorTypeaheadComponent } from '../author-typeahead/component';
 
 @Component({
   selector: 'app-books',
@@ -38,7 +40,10 @@ export class BooksComponent {
 
   editBook: IBook = {
     name: '',
+    author: '',
     id: '',
+    releaseDate: '',
+    publisher: '',
   };
 
   async deleteBook(book: IBook) {
@@ -58,7 +63,13 @@ export class BooksComponent {
     editBookModal.show();
   }
 
-  saveEdit(editBookModal: ModalDirective) {
+  async saveEdit(
+    editBookModal: ModalDirective,
+    authorTypeAhead: AuthorTypeaheadComponent,
+    publisherTypeAhead: PublisherTypeaheadComponent,
+  ) {
+    await authorTypeAhead.save();
+    await publisherTypeAhead.save();
     if (this.isEdit && this.editBook.id) {
       const loader = this.loaderService.show();
       this.booksService.update(this.editBook.id, this.editBook);

@@ -4,6 +4,9 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/comp
 export interface IBook {
   id?: string;
   name: string;
+  author: string;
+  publisher: string;
+  releaseDate: string;
 }
 
 @Injectable({
