@@ -12,11 +12,19 @@ export class LoaderService {
 
   show(): number {
     const id = new Date().getTime();
-    this.loaders.push(id);
+    if (this.loaders.length === 0) {
+      setTimeout(() => {
+        this.loaders.push(id);
+      }, 0);
+    } else {
+      this.loaders.push(id);
+    }
     return id;
   }
 
   hide(id: number) {
-    this.loaders = this.loaders.filter((_id) => _id !== id);
+    setTimeout(() => {
+      this.loaders = this.loaders.filter((_id) => _id !== id);
+    }, 0);
   }
 }
