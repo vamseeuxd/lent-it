@@ -24,7 +24,7 @@ import { PopoverModule } from 'ngx-bootstrap/popover';
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    AngularFirestoreModule, // for firestore
+    AngularFirestoreModule.enablePersistence(), // for firestore
   ],
   providers: [],
   bootstrap: [AppComponent],
