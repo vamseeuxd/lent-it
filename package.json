@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --configuration development",
     "deploy": "firebase deploy",
     "module": "ng g m books --route books --module app ",
     "watch": "ng build --watch --configuration development",
@@ -21,6 +21,7 @@
     "@angular/platform-browser": "^14.1.0",
     "@angular/platform-browser-dynamic": "^14.1.0",
     "@angular/router": "^14.1.0",
+    "@angular/service-worker": "^14.1.0",
     "bootstrap": "^5.2.3",
     "firebase": "^9.9.1",
     "fontawesome-4.7": "^4.7.0",
